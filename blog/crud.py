@@ -14,7 +14,7 @@ def get_blogs(db: Session, skip=0, limit=5):
 
 def create_blog(db: Session, request):
     new_blog = models.Blog(title=request.title,
-                           body=request.body, published=request.published)
+                           body=request.body, published=request.published,user_id=request.user_id)
     db.add(new_blog)
     db.commit()
     db.refresh(new_blog)
@@ -39,7 +39,7 @@ def create_user(db: Session, request):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return new_user
+    return 'User is successfully created'
 
 
 def get_user(db: Session, user_id=None, user_username=None):

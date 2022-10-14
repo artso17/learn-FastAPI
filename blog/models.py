@@ -9,6 +9,9 @@ class Blog(Base):
     title = Column(String)
     body = Column(String)
     published = Column(Boolean)
+    user_id=Column(Integer,ForeignKey('users.id'))
+
+    creator=relationship('User',back_populates='blogs')
 
 
 class User(Base):
@@ -17,3 +20,5 @@ class User(Base):
     username = Column(String)
     email = Column(String)
     password = Column(String)
+
+    blogs=relationship('Blog',back_populates='creator')
