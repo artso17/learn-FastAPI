@@ -18,7 +18,7 @@ def create_user(request: schemas.User, db: Session = Depends(get_db)):
 def get_user(id: int = None, username: str = None, db: Session = Depends(get_db)):
     if id and username:
         raise HTTPException(status.HTTP_400_BAD_REQUEST)
-    user = crud.get_user(db, user_id=id, user_username=username)
+    user = crud.get_current_user(db, user_id=id, user_username=username)
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND,
                             detail='Current user not founds')
